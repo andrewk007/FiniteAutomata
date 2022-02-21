@@ -1,5 +1,8 @@
+#to do: lambda option, keeping track of alphabet and error when a fake character
+#is encountered. 
+
 def main():
-    file_name = "sample2.txt"
+    file_name = "sample1.txt"
     #file_name = input("Enter file name")
     calculate(file_name)
 
@@ -40,9 +43,9 @@ def calculate(file_name):
                     curr_state = arr_states[int(i[1])]
                     print("going to state: " + i[1])
         if curr_state.final_state == True:
-            print("String Accepted")
+            print("YES")
         else:
-            print("String not accepted")
+            print("NO")
 
             
 class State:
