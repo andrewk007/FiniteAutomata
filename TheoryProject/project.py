@@ -7,6 +7,8 @@ def calculate(file_name):
     file = open(file_name)
     content = file.readlines()
     num_states = content[0]
+    final_states = tuple(map(int,content[-1].replace(" "," ").rstrip().split(' ')))
+    print(final_states)
     keepPlaying = True
     print("Number of states: " + num_states)
     size_alphabet = content[1]
@@ -20,7 +22,10 @@ def calculate(file_name):
         next_states.append(content[i].replace(" ","").rstrip())
     for i in range(int(num_states)):
         new_state = State(i)
-        new_state.functions(size_alphabet,chars,next_states)
+        if i in final_states:
+            new_state.functions(size_alphabet,chars,next_states,True)
+        else:
+            new_state.functions(size_alphabet,chars,next_states)
         arr_states.append(new_state)
     print("Transition Tables: " + str(next_states))
     while(keepPlaying):
@@ -34,13 +39,18 @@ def calculate(file_name):
                 if char == i[0]:
                     curr_state = arr_states[int(i[1])]
                     print("going to state: " + i[1])
+        if curr_state.final_state == True:
+            print("String Accepted")
+        else:
+            print("String not accepted")
 
             
 class State:
     def __init__(self,number):
         self.state_num = number    
 
-    def functions(self,size_alpha,chars,next_states):
+    def functions(self,size_alpha,chars,next_states,final_state = False):
+        self.final_state = final_state
         self.size = size_alpha
         self.letters = chars.replace(" ","").rstrip()
         self.input_next_state = []# (input, next state)
