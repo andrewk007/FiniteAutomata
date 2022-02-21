@@ -1,4 +1,3 @@
-#to do: lambda option
 #clean the debug code
 
 def main():
@@ -38,6 +37,8 @@ def calculate(file_name):
             break
         curr_state = arr_states[0]
         for char in string:
+            if string == "LAMBDA":
+                break
             if char not in chars:
                 print("ERROR: "+ str(char))
                 keepPlaying = False
