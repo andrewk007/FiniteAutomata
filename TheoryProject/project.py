@@ -1,8 +1,8 @@
-#to do: lambda option, keeping track of alphabet and error when a fake character
-#is encountered. 
+#to do: lambda option
+#clean the debug code
 
 def main():
-    file_name = "sample1.txt"
+    file_name = "sample2.txt"
     #file_name = input("Enter file name")
     calculate(file_name)
 
@@ -38,6 +38,10 @@ def calculate(file_name):
             break
         curr_state = arr_states[0]
         for char in string:
+            if char not in chars:
+                print("ERROR: "+ str(char))
+                keepPlaying = False
+                return
             for i in curr_state.input_next_state:
                 if char == i[0]:
                     curr_state = arr_states[int(i[1])]
@@ -47,7 +51,6 @@ def calculate(file_name):
         else:
             print("NO")
 
-            
 class State:
     def __init__(self,number):
         self.state_num = number    
